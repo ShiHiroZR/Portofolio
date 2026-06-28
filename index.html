@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toshihiro Ziyad Rafif — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1117;
+    --bg-raised: #151B23;
+    --text: #E6E1D8;
+    --text-dim: #8B8378;
+    --sage: #7C9885;
+    --amber: #C9A876;
+    --line: #232B35;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  nav .logo {
+    font-size: 13px;
+    color: var(--sage);
+    letter-spacing: 0.5px;
+  }
+  nav .links { display: flex; gap: 28px; }
+  nav .links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  nav .links a:hover { color: var(--text); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 70px;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    color: var(--sage);
+    letter-spacing: 1.5px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    animation-delay: 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--sage);
+    display: inline-block;
+    animation: pulse 2s ease infinite;
+  }
+
+  h1.name {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(42px, 8vw, 84px);
+    line-height: 1.04;
+    letter-spacing: -1px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+    animation-delay: 0.25s;
+  }
+  h1.name em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage);
+  }
+
+  .pitch {
+    margin-top: 28px;
+    max-width: 560px;
+    font-size: 15.5px;
+    color: var(--text-dim);
+    line-height: 1.75;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+    animation-delay: 0.4s;
+  }
+  .pitch strong { color: var(--text); font-weight: 500; }
+
+  .hero-meta {
+    margin-top: 44px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+    animation-delay: 0.55s;
+  }
+  .hero-meta .item {
+    font-size: 11.5px;
+    color: var(--text-dim);
+    border-left: 2px solid var(--line);
+    padding-left: 12px;
+  }
+  .hero-meta .item b { color: var(--amber); display: block; font-size: 12px; margin-bottom: 2px; font-weight: 600; }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px; left: 28px;
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+    animation-delay: 0.8s;
+  }
+  .scroll-hint .line {
+    width: 28px; height: 1px;
+    background: var(--text-dim);
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-hint .line::after {
+    content: '';
+    position: absolute;
+    width: 8px; height: 1px;
+    background: var(--sage);
+    animation: slide 1.8s ease-in-out infinite;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  @keyframes slide {
+    0% { left: -10px; }
+    100% { left: 28px; }
+  }
+
+  /* ---------- SECTION LABELS ---------- */
+  .section-label {
+    font-size: 12px;
+    color: var(--sage);
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  h2.section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(28px, 4vw, 38px);
+    margin-bottom: 48px;
+    letter-spacing: -0.5px;
+  }
+
+  section { padding: 120px 0; border-top: 1px solid var(--line); }
+
+  /* ---------- PROJECTS ---------- */
+  .project-card {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 36px 36px 32px;
+    margin-bottom: 28px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .project-card:hover {
+    border-color: var(--sage);
+    transform: translateY(-3px);
+  }
+
+  .terminal-line {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .terminal-line .prompt { color: var(--sage); }
+  .terminal-line .cmd { color: var(--amber); }
+
+  .project-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .project-tagline {
+    font-size: 13px;
+    color: var(--sage);
+    margin-bottom: 18px;
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+  }
+  .project-card p.desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.75;
+    margin-bottom: 22px;
+    max-width: 620px;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  .tag {
+    font-size: 11px;
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 4px 10px;
+    background: var(--bg);
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+  }
+  .repo-link {
+    font-size: 12px;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .repo-link:hover { color: var(--sage); }
+  .repo-link svg { width: 14px; height: 14px; }
+
+  .feat-list {
+    font-size: 11.5px;
+    color: var(--text-dim);
+  }
+
+  /* ---------- STACK ---------- */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 14px;
+  }
+  .stack-item {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 18px;
+    background: var(--bg-raised);
+    transition: border-color 0.25s;
+  }
+  .stack-item:hover { border-color: var(--amber); }
+  .stack-item .label { font-size: 13px; color: var(--text); font-weight: 500; }
+  .stack-item .cat { font-size: 10px; color: var(--text-dim); margin-top: 4px; letter-spacing: 0.5px; }
+
+  /* ---------- CONTACT ---------- */
+  footer.contact {
+    padding: 120px 0 80px;
+    border-top: 1px solid var(--line);
+  }
+  .contact-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 500;
+    line-height: 1.15;
+    max-width: 600px;
+    letter-spacing: -0.5px;
+  }
+  .contact-headline em { color: var(--sage); font-style: italic; font-weight: 300; }
+
+  .contact-links {
+    margin-top: 44px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .contact-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    padding: 11px 22px;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .contact-links a:hover {
+    border-color: var(--sage);
+    background: var(--bg-raised);
+    color: var(--sage);
+  }
+
+  .footer-note {
+    margin-top: 70px;
+    font-size: 11px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+
+  @media (max-width: 600px) {
+    nav .links { gap: 16px; }
+    nav .links a { font-size: 11px; }
+    section { padding: 80px 0; }
+    .project-card { padding: 26px 22px; }
+    .card-footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">THZR<span style="color:var(--text-dim)">.dev</span></div>
+    <div class="links">
+      <a href="#work">Proyek</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Kontak</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>TERSEDIA UNTUK MAGANG IT</div>
+    <h1 class="name">Toshihiro Ziyad<br><em>Rafif</em></h1>
+    <p class="pitch">
+      Mahasiswa <strong>D4 Manajemen Informatika</strong> di UNESA yang membangun sistem dari ujung ke ujung —
+      <strong>backend API</strong> di Laravel, <strong>antarmuka</strong> di React, dan <strong>aplikasi mobile</strong>
+      di Flutter. Lebih suka membangun sesuatu yang utuh daripada setengah jadi.
+    </p>
+    <div class="hero-meta">
+      <div class="item"><b>UNESA</b>Manajemen Informatika</div>
+      <div class="item"><b>Surabaya</b>Indonesia</div>
+      <div class="item"><b>2 Proyek</b>Web & Mobile</div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="line"></div>scroll</div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-label">// PROYEK TERPILIH</div>
+    <h2 class="section-title">Yang sudah dibangun</h2>
+
+    <div class="project-card">
+      <div class="terminal-line"><span class="prompt">$</span> cd umkmart <span class="cmd">&& git log --oneline -1</span></div>
+      <h3>UMKMart</h3>
+      <div class="project-tagline">REST API marketplace untuk UMKM lokal</div>
+      <p class="desc">
+        Backend RESTful API untuk platform marketplace yang menghubungkan pelaku UMKM dengan pembeli.
+        Mendukung autentikasi berbasis JWT dengan role-based access control untuk beberapa tipe pengguna,
+        serta struktur basis data relasional untuk produk, transaksi, dan manajemen akun.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Laravel 12</span>
+        <span class="tag">JWT Auth</span>
+        <span class="tag">REST API</span>
+        <span class="tag">MySQL</span>
+      </div>
+      <div class="card-footer">
+        <a class="repo-link" href="https://github.com/ShiHiroZR/UMKMart" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          Lihat di GitHub
+        </a>
+        <div class="feat-list">Marketplace · Multi-role · 2026</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="terminal-line"><span class="prompt">$</span> cd kelarin <span class="cmd">&& flutter run</span></div>
+      <h3>Kelarin</h3>
+      <div class="project-tagline">Aplikasi produktivitas — fokus dan rapikan tugasmu</div>
+      <p class="desc">
+        Aplikasi mobile cross-platform yang menggabungkan timer fokus bergaya Pomodoro dengan manajemen tugas.
+        State management diatur dengan Riverpod agar tetap scalable di seluruh fitur, dengan sinkronisasi data
+        real-time dan autentikasi pengguna lewat Firebase.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Flutter</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">Riverpod</span>
+        <span class="tag">Dart</span>
+      </div>
+      <div class="card-footer">
+        <a class="repo-link" href="https://github.com/ShiHiroZR/Kelarin" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          Lihat di GitHub
+        </a>
+        <div class="feat-list">Mobile · Productivity · 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="section-label">// TOOLBOX</div>
+    <h2 class="section-title">Yang dipakai sehari-hari</h2>
+    <div class="stack-grid">
+      <div class="stack-item"><div class="label">Laravel</div><div class="cat">BACKEND</div></div>
+      <div class="stack-item"><div class="label">React</div><div class="cat">FRONTEND</div></div>
+      <div class="stack-item"><div class="label">Flutter</div><div class="cat">MOBILE</div></div>
+      <div class="stack-item"><div class="label">Firebase</div><div class="cat">BACKEND</div></div>
+      <div class="stack-item"><div class="label">MySQL</div><div class="cat">DATABASE</div></div>
+      <div class="stack-item"><div class="label">Tailwind CSS</div><div class="cat">STYLING</div></div>
+      <div class="stack-item"><div class="label">Riverpod</div><div class="cat">STATE MGMT</div></div>
+      <div class="stack-item"><div class="label">Figma</div><div class="cat">DESIGN</div></div>
+      <div class="stack-item"><div class="label">Git & GitHub</div><div class="cat">VERSION CONTROL</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-label">// Let's Connect</div>
+    <h1 class="contact-headline">Sedang mencari kesempatan <em>magang IT</em>.<br>Boleh ngobrol dulu?</h1>
+    <div class="contact-links">
+      <a href="mailto:toshihiroziyadrafif@gmail.com">✉ Email</a>
+      <a href="https://github.com/ShiHiroZR" target="_blank" rel="noopener">⌥ GitHub</a>
+      <a href="https://www.linkedin.com/in/toshihiro-ziyad-rafif-7b7104355/" target="_blank" rel="noopener">in LinkedIn</a>
+    </div>
+    <div class="footer-note">Toshihiro Ziyad Rafif — Sidoarjo, Indonesia.</div>
+  </div>
+</footer>
+
+</body>
+</html>
